@@ -1,6 +1,6 @@
 'use strict';
 
-window.renderStatistics = (function (ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(110, 20, 420, 270);
   ctx.fillStyle = '#fff';
@@ -29,7 +29,11 @@ window.renderStatistics = (function (ctx, names, times) {
     ctx.fillText(names[i], initialX + indent * i + barWidth * i, initialY + histogramHeight + histogramMargin);
   }
 
-  for (var index = 0; index < times.length; index++) {
+  rectsDraw(times, names, ctx, indent, barWidth, initialY, histogramHeight, step, initialX);
+};
+
+function rectsDraw(times, names, ctx, indent, barWidth, initialY, histogramHeight, step, initialX) {
+  for (var i = 0; i < times.length; i++) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
@@ -37,7 +41,7 @@ window.renderStatistics = (function (ctx, names, times) {
     }
     ctx.fillRect(initialX + indent * i + barWidth * i, initialY + histogramHeight - times[i] * step, barWidth, times[i] * step);
   }
-});
+}
 
 function getMaxElement(arr) {
   var max = -1;
