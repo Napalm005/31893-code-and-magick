@@ -48,7 +48,7 @@
       x: evt.clientX,
       y: evt.clientY
     };
-    var onMouseMove = function (moveEvt) {
+    function onMouseMove(moveEvt) {
       moveEvt.preventDefault();
       var shift = {
         x: startCoords.x - moveEvt.clientX,
@@ -61,7 +61,7 @@
       window.vars.setup.style.top = (window.vars.setup.offsetTop - shift.y) + 'px';
       window.vars.setup.style.left = (window.vars.setup.offsetLeft - shift.x) + 'px';
     };
-    var onMouseUp = function (upEvt) {
+    function onMouseUp(upEvt) {
       upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
