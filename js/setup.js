@@ -2,7 +2,6 @@
 
 (function () {
   var wizards = [];
-  var wizardsQuantity = 4;
   var shopElement = document.querySelector('.setup-artifacts-shop');
   var draggedItem = null;
   var artifactsElement = document.querySelector('.setup-artifacts');
@@ -11,13 +10,13 @@
   var wizardEyes = wizard.querySelector('.wizard-eyes');
   var fireball = document.querySelector('.setup-fireball-wrap');
 
-  window.data = {
+  window.setup = {
     errorHandler: function () {
       alert("Всё плохо!");
     }
   };
 
-  window.backend.load(successHandler, window.data.errorHandler);
+  window.backend.load(successHandler, window.setup.errorHandler);
 
   function successHandler(data) {
     wizards = data;
@@ -30,20 +29,9 @@
 
   function fillElement(element, color) {
     element.style.fill = color;
-  };
+  }
   function changeElementBackground(element, color) {
     element.style.backgroundColor = color;
-  };
-
-  createWizardsArray();
-  function createWizardsArray() {
-    for (var wizardItem = 1; wizardItem <= wizardsQuantity; wizardItem++) {
-      wizards.push({
-        name: window.vars.WIZARD_NAMES[window.util.getRandomArbitary(0, window.vars.WIZARD_NAMES.length)] + ' ' + window.vars.WIZARD_SURNAME[window.util.getRandomArbitary(0, window.vars.WIZARD_SURNAME.length)],
-        coatColor: window.vars.WIZARD_COAT_COLOR[window.util.getRandomArbitary(0, window.vars.WIZARD_COAT_COLOR.length)],
-        eyesColor: window.vars.WIZARD_EYES_COLOR[window.util.getRandomArbitary(0, window.vars.WIZARD_EYES_COLOR.length)]
-      });
-    }
   }
 
   shopElement.addEventListener('dragstart', function (evt) {

@@ -53,7 +53,10 @@
       var loader = document.createElement('script');
 
       loader.addEventListener('error', function () {
-        onError();
+        onError('Произошла ошибка соединения');
+      });
+      loader.addEventListener('timeout', function () {
+        onError('Запрос не успел выполниться');
       });
 
       loader.src = SERVER_URL + 'data?callback=' + CALLBACK_NAME;
