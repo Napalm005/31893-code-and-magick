@@ -13,13 +13,12 @@
     return wizardElement;
   }
 
-  window.render = {
-    renderWizardsList: function (wizards) {
-      var fragment = document.createDocumentFragment();
-      for (var i = 0; i < wizardsQuantity; i++) {
-        fragment.appendChild(createWizard(wizards[i]));
-      }
-      similarListElement.appendChild(fragment);
+  window.render = function (wizards) {
+    similarListElement.innerHTML = '';
+    var fragment = document.createDocumentFragment();
+    for (var i = 0; i < wizardsQuantity; i++) {
+      fragment.appendChild(createWizard(wizards[i]));
     }
+    similarListElement.appendChild(fragment);
   };
 })();
