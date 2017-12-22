@@ -3,6 +3,13 @@
 (function () {
   var CALLBACK_NAME = '__jsonpCallback';
   var SERVER_URL = '//js.dump.academy/code-and-magick/';
+  var SERVER_TIMEOUT = 10000;
+  var StatusCode = {
+    OK: 200,
+    BAD_REQUEST: 400,
+    UNAUTHORIZED: 401,
+    NOT_FOUND: 404
+  };
 
   var setup = function (onSuccess, onError) {
     var xhr = new XMLHttpRequest();
@@ -10,16 +17,16 @@
 
     xhr.addEventListener('load', function () {
       switch (xhr.status) {
-        case 200:
+        case StatusCode.OK:
           onSuccess(xhr.response);
           break;
-        case 400:
+        case StatusCode.BAD_REQUEST:
           onError(xhr.status + ': Неверный запрос' + xhr.statusText);
           break;
-        case 401:
+        case StatusCode.UNAUTHORIZED:
           onError(xhr.status + ': ' + xhr.statusText);
           break;
-        case 404:
+        case StatusCode.NOT_FOUND:
           onError(xhr.status + ': ' + xhr.statusText);
           break;
         default:
@@ -33,7 +40,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = SERVER_TIMEOUT; // 10s
 
     return xhr;
   };

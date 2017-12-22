@@ -1,17 +1,20 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
+  var Keycode = {
+    ESC: 27,
+    ENTER: 13
+  }
+  var lastTimeout;
 
   window.util = {
     isEscEvent: function (evt, action) {
-      if (evt.keyCode === ESC_KEYCODE) {
+      if (evt.keyCode === Keycode.ESC) {
         action();
       }
     },
     isEnterEvent: function (evt, action) {
-      if (evt.keyCode === ENTER_KEYCODE) {
+      if (evt.keyCode === Keycode.ENTER) {
         action();
       }
     },
@@ -27,6 +30,12 @@
     },
     getRandomArbitary: function (min, max) {
       return parseInt(Math.random() * (max - min) + min, 10);
+    },
+    debounce: function (fun, debounceInterval) {
+      if (lastTimeout) {
+        window.clearTimeout(lastTimeout);
+      }
+      lastTimeout = window.setTimeout(fun, debounceInterval);
     }
   };
 })();
